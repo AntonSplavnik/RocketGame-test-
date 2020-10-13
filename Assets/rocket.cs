@@ -7,32 +7,43 @@ public class rocket : MonoBehaviour
 {
     Rigidbody rigidBody;
     AudioSource sound;
-    public float forwardForce = 20f;
-    public float sideForce = 20f;
+    [SerializeField] float forwardForce = 20f;
+    [SerializeField] float sideForce = 20f;
 
 
     void Start()
     {
-
         sound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
     }
 
     
-    public void Update()
+    public void Update()    
     {
 
         Thrust(forwardForce);
         Rotation(sideForce);
-
     }
 
-    private void Thrust(float up)
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Start":
+                print("Start");
+                break;
+            case "Obstacle":
+                print("Obstacle");
+                break;
+        }
+    }
+    
+    private void Thrust(float upForce)
     {
         if (Input.GetKey(KeyCode.Space))
         {
             print("boost");
-            rigidBody.AddRelativeForce(0, up, 0);
+            rigidBody.AddRelativeForce(0, upForce, 0);
 
             if (!sound.isPlaying)
                 sound.Play();
@@ -41,21 +52,21 @@ public class rocket : MonoBehaviour
         else
             sound.Stop();
     }
-
-    private void Rotation(float sideway)
+    
+    private void Rotation(float sidewayForce)
     {
         rigidBody.freezeRotation = true;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
         {
-            print("left");
-            transform.Rotate(sideway * Time.deltaTime, 0, 0);
+            //print("left");
+            transform.Rotate(sidewayForce * Time.deltaTime, 0, 0);
         }
 
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.A))
         {
-            print("right");
-            transform.Rotate(-sideway * Time.deltaTime, 0, 0);
+            //print("right");
+            transform.Rotate(-sidewayForce * Time.deltaTime, 0, 0);
         }
 
         rigidBody.freezeRotation = false;
