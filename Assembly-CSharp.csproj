@@ -50,7 +50,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\rocket.cs" />
+     <Compile Include="Assets\Scripts\rocket.cs" />
      <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
  <HintPath>/Volumes/Secondary 1 Tb/Git/RocketGame/RocketGame(test)/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
